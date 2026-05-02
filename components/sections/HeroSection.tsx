@@ -3,135 +3,103 @@ import { motion } from "framer-motion";
 import { personalInfo } from "@/data/portfolio";
 import { ArrowDown } from "lucide-react";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-};
-
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center py-8 lg:py-0 px-6 md:px-12"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left */}
-          <motion.div variants={container} initial="hidden" animate="show">
-            <motion.p
-              variants={item}
-              className="text-[var(--accent-text)] font-syne text-xs tracking-[0.2em] uppercase mb-6"
-            >
-              {personalInfo.tagline}
-            </motion.p>
+      {/* Tagline */}
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="font-syne text-[var(--text-muted)] text-[11px] tracking-[0.3em] uppercase mb-6 text-center z-10"
+      >
+        {personalInfo.tagline}
+      </motion.p>
 
-            <motion.h1
-              variants={item}
-              className="font-syne font-black text-[var(--text-primary)] leading-none mb-4"
-              style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
-            >
-              {personalInfo.firstName}
-            </motion.h1>
-            <motion.h1
-              variants={item}
-              className="font-syne font-black leading-none mb-8"
+      {/* Name + photo overlap container */}
+      <div className="relative flex flex-col items-center select-none">
+        {/* Line 1 */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="font-syne font-black uppercase leading-[0.88] text-center tracking-tight"
+          style={{
+            fontSize: "clamp(64px, 12vw, 180px)",
+            color: "var(--hero-name)",
+          }}
+        >
+          {personalInfo.firstName}
+        </motion.h1>
+
+        {/* Line 2 */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="font-syne font-black uppercase leading-[0.88] text-center tracking-tight"
+          style={{
+            fontSize: "clamp(64px, 12vw, 180px)",
+            color: "var(--hero-name)",
+          }}
+        >
+          {personalInfo.lastName}
+        </motion.h1>
+
+        {/* Photo overlapping the name — centered absolutely */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ zIndex: 10 }}
+        >
+          <div
+            className="overflow-hidden shadow-2xl"
+            style={{
+              width: "clamp(160px, 18vw, 260px)",
+              height: "clamp(220px, 25vw, 360px)",
+              borderRadius: "50%",
+            }}
+          >
+            {/* Photo placeholder — replace src with actual image */}
+            <div
+              className="w-full h-full flex items-center justify-center"
               style={{
-                fontSize: "clamp(3.5rem, 8vw, 7rem)",
-                WebkitTextStroke: "1px var(--border)",
-                color: "transparent",
+                background: "linear-gradient(160deg, #1E1E1E 0%, #111 60%, #0a1a00 100%)",
               }}
             >
-              {personalInfo.lastName}
-            </motion.h1>
-
-            <motion.p
-              variants={item}
-              className="text-[var(--text-secondary)] font-syne text-sm tracking-widest uppercase mb-8"
-            >
-              {personalInfo.title}
-            </motion.p>
-
-            <motion.div variants={item} className="flex gap-4 flex-wrap">
-              <a
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="bg-[var(--accent)] text-black font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:bg-[var(--accent-hover)] transition-colors"
+              <span
+                className="font-syne font-black text-[var(--accent)] select-none"
+                style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
               >
-                VIEW WORK
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="border border-[var(--border)] text-[var(--text-primary)] font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:border-[var(--accent-text)] hover:text-[var(--accent-text)] transition-colors"
-              >
-                GET IN TOUCH
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Right - Photo placeholder */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
-          >
-            <div
-              className="relative rounded-2xl overflow-hidden aspect-[4/5]"
-              style={{ background: "linear-gradient(135deg, var(--bg-surface-hover) 0%, var(--bg-surface) 50%, #0E1A00 100%)" }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-[var(--accent)]/20 flex items-center justify-center mb-4">
-                  <span className="text-[var(--accent-text)] font-syne font-black text-3xl">MS</span>
-                </div>
-                <p className="text-[var(--text-muted)] text-xs font-syne tracking-widest">MRINALINI S</p>
-              </div>
-              <div className="absolute bottom-6 right-6 bg-[var(--accent)] text-black font-syne font-bold text-xs px-3 py-1.5 rounded">
-                AVAILABLE FOR HIRE
-              </div>
+                MS
+              </span>
             </div>
-
-            {/* Floating stat card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 }}
-              className="absolute -left-6 bottom-16 bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl px-5 py-4"
-            >
-              <p className="text-[var(--accent-text)] font-syne font-black text-2xl">5+</p>
-              <p className="text-[var(--text-secondary)] text-xs font-syne tracking-wide">Years Experience</p>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-16 flex items-center gap-3"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            <ArrowDown size={16} className="text-[var(--text-muted)]" />
-          </motion.div>
-          <span className="text-[var(--text-muted)] text-xs font-syne tracking-widest">SCROLL TO EXPLORE</span>
+          </div>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+        >
+          <ArrowDown size={16} className="text-[var(--text-muted)]" />
+        </motion.div>
+        <span className="text-[var(--text-muted)] text-[10px] font-syne tracking-[0.25em]">
+          SCROLL
+        </span>
+      </motion.div>
     </section>
   );
 }
