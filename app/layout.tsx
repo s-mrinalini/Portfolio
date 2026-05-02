@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import SidebarNav from "@/components/SidebarNav";
 import MobileNav from "@/components/MobileNav";
 
@@ -14,13 +15,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full bg-[#0E0E0E] text-white antialiased">
-        <SidebarNav />
-        <MobileNav />
-        <main className="md:ml-[220px]">
-          {children}
-        </main>
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <body className="min-h-full antialiased">
+        <ThemeProvider>
+          <SidebarNav />
+          <MobileNav />
+          <main className="lg:ml-[220px]">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

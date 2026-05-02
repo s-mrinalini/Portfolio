@@ -5,9 +5,7 @@ import { ArrowDown } from "lucide-react";
 
 const container = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12 },
-  },
+  show: { transition: { staggerChildren: 0.12 } },
 };
 
 const item = {
@@ -19,22 +17,22 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center py-24 md:py-0 px-6 md:px-12"
+      className="min-h-screen flex items-center py-8 lg:py-0 px-6 md:px-12"
     >
       <div className="w-full max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left */}
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.p
               variants={item}
-              className="text-[#C8FF00] font-syne text-xs tracking-[0.2em] uppercase mb-6"
+              className="text-[var(--accent-text)] font-syne text-xs tracking-[0.2em] uppercase mb-6"
             >
               {personalInfo.tagline}
             </motion.p>
 
             <motion.h1
               variants={item}
-              className="font-syne font-black text-white leading-none mb-4"
+              className="font-syne font-black text-[var(--text-primary)] leading-none mb-4"
               style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
             >
               {personalInfo.firstName}
@@ -44,7 +42,7 @@ export default function HeroSection() {
               className="font-syne font-black leading-none mb-8"
               style={{
                 fontSize: "clamp(3.5rem, 8vw, 7rem)",
-                WebkitTextStroke: "1px #2A2A2A",
+                WebkitTextStroke: "1px var(--border)",
                 color: "transparent",
               }}
             >
@@ -53,19 +51,19 @@ export default function HeroSection() {
 
             <motion.p
               variants={item}
-              className="text-[#999999] font-syne text-sm tracking-widest uppercase mb-8"
+              className="text-[var(--text-secondary)] font-syne text-sm tracking-widest uppercase mb-8"
             >
               {personalInfo.title}
             </motion.p>
 
-            <motion.div variants={item} className="flex gap-4">
+            <motion.div variants={item} className="flex gap-4 flex-wrap">
               <a
                 href="#projects"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="bg-[#C8FF00] text-black font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:bg-[#D4FF33] transition-colors"
+                className="bg-[var(--accent)] text-black font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:bg-[var(--accent-hover)] transition-colors"
               >
                 VIEW WORK
               </a>
@@ -75,7 +73,7 @@ export default function HeroSection() {
                   e.preventDefault();
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="border border-[#2A2A2A] text-white font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:border-[#C8FF00] hover:text-[#C8FF00] transition-colors"
+                className="border border-[var(--border)] text-[var(--text-primary)] font-syne font-bold text-xs tracking-widest px-6 py-3 rounded hover:border-[var(--accent-text)] hover:text-[var(--accent-text)] transition-colors"
               >
                 GET IN TOUCH
               </a>
@@ -89,19 +87,18 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/5]"
-              style={{ background: "linear-gradient(135deg, #1E1E1E 0%, #161616 50%, #0E1A00 100%)" }}
+            <div
+              className="relative rounded-2xl overflow-hidden aspect-[4/5]"
+              style={{ background: "linear-gradient(135deg, var(--bg-surface-hover) 0%, var(--bg-surface) 50%, #0E1A00 100%)" }}
             >
-              {/* Decorative gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#C8FF00]/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/10 via-transparent to-transparent" />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-[#C8FF00]/20 flex items-center justify-center mb-4">
-                  <span className="text-[#C8FF00] font-syne font-black text-3xl">MS</span>
+                <div className="w-24 h-24 rounded-full bg-[var(--accent)]/20 flex items-center justify-center mb-4">
+                  <span className="text-[var(--accent-text)] font-syne font-black text-3xl">MS</span>
                 </div>
-                <p className="text-[#666666] text-xs font-syne tracking-widest">MRINALINI S</p>
+                <p className="text-[var(--text-muted)] text-xs font-syne tracking-widest">MRINALINI S</p>
               </div>
-              {/* Corner accent */}
-              <div className="absolute bottom-6 right-6 bg-[#C8FF00] text-black font-syne font-bold text-xs px-3 py-1.5 rounded">
+              <div className="absolute bottom-6 right-6 bg-[var(--accent)] text-black font-syne font-bold text-xs px-3 py-1.5 rounded">
                 AVAILABLE FOR HIRE
               </div>
             </div>
@@ -111,10 +108,10 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
-              className="absolute -left-6 bottom-16 bg-[#161616] border border-[#2A2A2A] rounded-xl px-5 py-4"
+              className="absolute -left-6 bottom-16 bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl px-5 py-4"
             >
-              <p className="text-[#C8FF00] font-syne font-black text-2xl">5+</p>
-              <p className="text-[#999999] text-xs font-syne tracking-wide">Years Experience</p>
+              <p className="text-[var(--accent-text)] font-syne font-black text-2xl">5+</p>
+              <p className="text-[var(--text-secondary)] text-xs font-syne tracking-wide">Years Experience</p>
             </motion.div>
           </motion.div>
         </div>
@@ -130,9 +127,9 @@ export default function HeroSection() {
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >
-            <ArrowDown size={16} className="text-[#666666]" />
+            <ArrowDown size={16} className="text-[var(--text-muted)]" />
           </motion.div>
-          <span className="text-[#666666] text-xs font-syne tracking-widest">SCROLL TO EXPLORE</span>
+          <span className="text-[var(--text-muted)] text-xs font-syne tracking-widest">SCROLL TO EXPLORE</span>
         </motion.div>
       </div>
     </section>

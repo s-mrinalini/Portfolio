@@ -13,15 +13,15 @@ const gradients = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 px-6 md:px-12 border-t border-[#2A2A2A]">
+    <section id="projects" className="py-24 px-6 md:px-12 border-t border-[var(--border)]">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
-          <p className="text-[#C8FF00] font-syne text-xs tracking-[0.2em] uppercase mb-2">02 — PROJECTS</p>
+          <p className="text-[var(--accent-text)] font-syne text-xs tracking-[0.2em] uppercase mb-2">02 — PROJECTS</p>
           <div className="flex items-end justify-between mb-12">
-            <h2 className="text-white font-syne font-black text-4xl md:text-5xl">
+            <h2 className="text-[var(--text-primary)] font-syne font-black text-4xl md:text-5xl">
               Selected Work
             </h2>
-            <span className="text-[#666666] font-syne text-xs tracking-widest hidden md:block">
+            <span className="text-[var(--text-muted)] font-syne text-xs tracking-widest hidden md:block">
               {projects.length} PROJECTS
             </span>
           </div>
@@ -33,7 +33,7 @@ export default function ProjectsSection() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.25 }}
-                className="bg-[#161616] border border-[#2A2A2A] rounded-2xl overflow-hidden cursor-pointer group"
+                className="border border-[var(--border)] rounded-2xl overflow-hidden cursor-pointer group bg-[var(--bg-surface)]"
               >
                 {/* Image placeholder */}
                 <div
@@ -45,14 +45,14 @@ export default function ProjectsSection() {
                       {project.title.charAt(0)}
                     </span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#161616]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-[#0E0E0E]/80 text-[#C8FF00] font-syne text-xs tracking-widest px-3 py-1 rounded">
+                    <span className="bg-black/60 text-[var(--accent-text)] font-syne text-xs tracking-widest px-3 py-1 rounded">
                       {project.category}
                     </span>
                   </div>
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-8 h-8 bg-[#C8FF00] rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-[var(--accent)] rounded-full flex items-center justify-center">
                       <ArrowUpRight size={14} className="text-black" />
                     </div>
                   </div>
@@ -60,13 +60,13 @@ export default function ProjectsSection() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-white font-syne font-bold text-xl mb-2">{project.title}</h3>
-                  <p className="text-[#666666] text-sm leading-relaxed mb-4">{project.description}</p>
+                  <h3 className="text-[var(--text-primary)] font-syne font-bold text-xl mb-2">{project.title}</h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[#999999] font-syne text-xs border border-[#2A2A2A] px-3 py-1 rounded-full"
+                        className="text-[var(--text-secondary)] font-syne text-xs border border-[var(--border)] px-3 py-1 rounded-full"
                       >
                         {tag}
                       </span>

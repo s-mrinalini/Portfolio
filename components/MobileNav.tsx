@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { personalInfo } from "@/data/portfolio";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "HOME", href: "#home" },
@@ -28,14 +29,26 @@ export default function MobileNav() {
 
   return (
     <>
-      {/* Hamburger Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed top-4 right-4 z-50 md:hidden bg-[#161616] border border-[#2A2A2A] rounded p-2.5 text-white"
-        aria-label="Toggle menu"
-      >
-        {open ? <X size={18} /> : <Menu size={18} />}
-      </button>
+      {/* Top bar visible on mobile/tablet only */}
+      <div className="fixed top-0 left-0 right-0 z-50 lg:hidden flex items-center justify-between px-4 py-3 border-b border-[var(--border)] bg-[var(--bg-primary)]">
+        <div>
+          <p className="text-[var(--text-muted)] font-syne text-[10px] tracking-widest uppercase">Portfolio</p>
+          <p className="text-[var(--text-primary)] font-syne font-bold text-sm leading-tight">{personalInfo.firstName} {personalInfo.lastName}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen(!open)}
+            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded p-2.5 text-[var(--text-primary)]"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Spacer so content doesn't hide behind the top bar */}
+      <div className="h-[57px] lg:hidden" />
 
       {/* Full-screen Overlay */}
       <AnimatePresence>
@@ -45,9 +58,9 @@ export default function MobileNav() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 bg-[#0E0E0E] flex flex-col px-8 py-16 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col px-8 py-16 lg:hidden bg-[var(--bg-primary)]"
           >
-            <p className="text-[#666666] text-xs tracking-widest font-syne mb-8">NAVIGATION</p>
+            <p className="text-[var(--text-muted)] text-xs tracking-widest font-syne mb-8">NAVIGATION</p>
             <nav className="space-y-2">
               {navLinks.map((link, i) => (
                 <motion.a
@@ -57,7 +70,7 @@ export default function MobileNav() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 + 0.1 }}
                   onClick={(e) => handleNav(e, link.href)}
-                  className="block text-3xl font-syne font-bold text-white hover:text-[#C8FF00] transition-colors py-2"
+                  className="block text-3xl font-syne font-bold text-[var(--text-primary)] hover:text-[var(--accent-text)] transition-colors py-2"
                 >
                   {link.label}
                 </motion.a>
@@ -68,11 +81,11 @@ export default function MobileNav() {
               <a
                 href="#contact"
                 onClick={(e) => handleNav(e, "#contact")}
-                className="inline-block bg-[#C8FF00] text-black font-syne font-bold text-sm tracking-widest px-8 py-3 rounded hover:bg-[#D4FF33] transition-colors"
+                className="inline-block bg-[var(--accent)] text-black font-syne font-bold text-sm tracking-widest px-8 py-3 rounded hover:bg-[var(--accent-hover)] transition-colors"
               >
                 HIRE ME
               </a>
-              <p className="text-[#666666] text-xs mt-4 font-syne">{personalInfo.email}</p>
+              <p className="text-[var(--text-muted)] text-xs mt-4 font-syne">{personalInfo.email}</p>
             </div>
           </motion.div>
         )}
