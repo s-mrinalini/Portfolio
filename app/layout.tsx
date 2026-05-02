@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import SidebarNav from "@/components/SidebarNav";
-import MobileNav from "@/components/MobileNav";
+import TopNav from "@/components/TopNav";
 
 export const metadata: Metadata = {
   title: "Mrinalini S — Full Stack Developer & UI/UX Designer",
@@ -18,9 +17,8 @@ export default function RootLayout({
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body className="min-h-full antialiased">
         <ThemeProvider>
-          <SidebarNav />
-          <MobileNav />
-          <main className="lg:ml-[220px]">
+          <TopNav />
+          <main>
             {children}
           </main>
         </ThemeProvider>
